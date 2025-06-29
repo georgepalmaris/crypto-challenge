@@ -21,7 +21,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/georgepalmaris/crypto-challenge">
-    <img src="https://www.webopedia.com/wp-content/uploads/1996/10/what-is-cryptography-scaled.webp" alt="Logo" width="80" height="80">
+    <img src="https://wallpapers.com/images/hd/cryptographic-communication-y52wx6tykl1h23o0.jpg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Crypto Challenge</h3>
@@ -30,11 +30,10 @@
     This project is for working through the CryptoPals challenges along with any other crypto based challenges that may come along (https://cryptopals.com/)
     It has also extended into interactive terminal exploration and graph generation in terminals.
     <br />
-    <a href="https://github.com/georgegeorgepalmaris/crypto-challenge/tree/main/docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/georgepalmaris/crypto-challenge/tree/main/docs"><strong>Explore the docs »</strong></a>
     <br />
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -62,7 +61,6 @@
 [![Python][PythonBadge]][Python-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
@@ -108,7 +106,6 @@ This how to install/create a python environment specifically for this project.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -124,9 +121,10 @@ Running the help command will tell you everything you can do:
    python main.py --help
    ```
 
-_For more examples, please refer to the [Documentation](https://github.com/georgegeorgepalmaris/crypto-challenge/tree/main/docs)_
+_For more examples, please refer to the [Documentation](https://github.com/georgepalmaris/crypto-challenge/tree/main/docs)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -151,14 +149,12 @@ Don't forget to give the project a star! Thanks again!
 </a>
 
 
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the project_license. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
