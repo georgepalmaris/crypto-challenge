@@ -83,7 +83,7 @@ def run_challenge(input_data: str):
                 f"Key: {chr(key)}, Score: {score:.4f}, Decoded Text: {plaintext.decode('utf-8', errors='ignore')}"
             )
 
-            if guess.plaintext.decode("utf-8", errors="ignore") == result_text:
+            if plaintext.decode("utf-8", errors="ignore") == result_text:
                 print("✅ Decoding successful!")
             else:
                 print("❌ Decoding did not match expected result.")

@@ -11,6 +11,7 @@ from typing import Optional
 from challenges.challenge_01 import run_challenge as run_challenge_1
 from challenges.challenge_02 import run_challenge as run_challenge_2
 from challenges.challenge_03 import run_challenge as run_challenge_3
+from challenges.challenge_04 import run_challenge as run_challenge_4
 
 
 def main():
@@ -73,6 +74,7 @@ def get_challenge_list():
         1: "Convert hex to base64",
         2: "Fixed XOR",
         3: "Single-byte XOR cipher",
+        4: "Detect single-character XOR",
         # Add more challenges as you implement them
     }
 
@@ -96,7 +98,8 @@ def run_challenge(challenge_num: int, input_data: Optional[str] = None):
             run_challenge_2(input_data)
         elif challenge_num == 3:
             run_challenge_3(input_data)
-        # Add more challenge calls as you implement them
+        elif challenge_num == 4:
+            run_challenge_4(input_data)
         else:
             print(f"⚠️  Challenge {challenge_num} not implemented yet!")
 
