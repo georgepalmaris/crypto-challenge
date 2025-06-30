@@ -32,17 +32,12 @@ def run_challenge(input_data: str):
 
     print("🏁 Expected Result (text):", result_text)
 
-    with open(f"{os.getcwd()}/challenges/assets/frankenstein.txt", "r") as f:
-        book = f.read()
-
-    english_frequencies = get_freqs(text=book, letters=ascii_lowercase)
-
     print("🔍 Analyzing hexadecimal strings")
 
     overall_best = ScoredGuess()
     for line in lines:
         print(end=".", flush=True)
-        candidate = crack_single_byte_xor(line, english_frequencies)
+        candidate = crack_single_byte_xor(line)
         overall_best = min(overall_best, candidate)
 
     score, key, _, plaintext = astuple(overall_best)
@@ -54,4 +49,4 @@ def run_challenge(input_data: str):
     if plaintext.decode("utf-8", errors="ignore").strip() == result_text:
         print("✅ Decoding successful!")
     else:
-        print("❌ Decoding did not match expected result.")  
+        print("❌ Decoding did not match expected result.")
