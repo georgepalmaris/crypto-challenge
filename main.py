@@ -14,6 +14,9 @@ from challenges.challenge_03 import run_challenge as run_challenge_3
 from challenges.challenge_04 import run_challenge as run_challenge_4
 from challenges.challenge_05 import run_challenge as run_challenge_5
 from challenges.challenge_06 import run_challenge as run_challenge_6
+from challenges.challenge_07 import run_challenge as run_challenge_7
+
+# from challenges.challenge_08 import run_challenge as run_challenge_8
 
 
 def main():
@@ -79,6 +82,8 @@ def get_challenge_list():
         4: "Detect single-character XOR",
         5: "Implement repeating-key XOR",
         6: "Break repeating-key XOR",
+        7: "AES in ECB mode",
+        8: "Detect AES in ECB mode",
         # Add more challenges as you implement them
     }
 
@@ -108,6 +113,10 @@ def run_challenge(challenge_num: int, input_data: Optional[str] = None):
             run_challenge_5(input_data)
         elif challenge_num == 6:
             run_challenge_6(input_data)
+        elif challenge_num == 7:
+            run_challenge_7(input_data)
+        # elif challenge_num == 8:
+        #     run_challenge_8(input_data)
         else:
             print(f"⚠️  Challenge {challenge_num} not implemented yet!")
 

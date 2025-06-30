@@ -1,4 +1,4 @@
-# https://cryptopals.com/sets/1/challenges/4
+# https://cryptopals.com/sets/1/challenges/6
 
 # """Challenge 6: Break repeating-key XOR
 # This challenge involves breaking a repeating-key XOR cipher.

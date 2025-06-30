@@ -80,7 +80,7 @@ This how to install/create a python environment specifically for this project.
   ```sh
   pyenv install 3.13
   pyenv virtualenv 3.13 crypto
-  pyenv active crypto
+  pyenv activate crypto
   ```
 * pip
   ```sh
@@ -96,11 +96,6 @@ This how to install/create a python environment specifically for this project.
 2. Install Pip Requirements
    ```sh
    pip install -r requirements.txt
-   ```
-3. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin georgepalmaris/crypto-challenge
-   git remote -v # confirm the changes
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
