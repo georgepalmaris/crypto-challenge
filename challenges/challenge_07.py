@@ -57,8 +57,14 @@ def run_challenge(input_data: str):
 
     print("🖼️ Bonus: Encrypting the penguin image...")
 
-    image = Image.open(f"{os.getcwd()}/challenges/assets/penguin.png").convert('RGBA').convert('RGB')
-    key = Random.new().read(AES.key_size[0])  # Generate a random key of the appropriate size
+    image = (
+        Image.open(f"{os.getcwd()}/challenges/assets/penguin.png")
+        .convert("RGBA")
+        .convert("RGB")
+    )
+    key = Random.new().read(
+        AES.key_size[0]
+    )  # Generate a random key of the appropriate size
 
     print("🔒 Encrypting image in ECB mode...")
     encrypt_image(image, key, AES.MODE_ECB).save(
@@ -78,16 +84,20 @@ def aes_ecb_decrypt(ciphertext: bytes, key: bytes) -> bytes:
     return cipher.decrypt(ciphertext)
 
 
-def encrypt_image(image: Image, key: bytes, mode: int = AES.MODE_ECB, iv: bytes = b'') -> Image:
+def encrypt_image(
+    image: Image, key: bytes, mode: int = AES.MODE_ECB, iv: bytes = b""
+) -> Image:
     image_array = bytes(image.tobytes())
     padding_length = AES.block_size - len(image_array) % AES.block_size
-    image_array += bytes(padding_length * ".", "UTF-8")  # Just an arbitrary padding byte
+    image_array += bytes(
+        padding_length * ".", "UTF-8"
+    )  # Just an arbitrary padding byte
 
     if mode == AES.MODE_CBC and not iv:
         raise ValueError("IV must be provided for CBC mode")
     elif mode not in (AES.MODE_ECB, AES.MODE_CBC):
         raise ValueError("Unsupported AES mode. Use AES.MODE_ECB or AES.MODE_CBC.")
-    
+
     if mode == AES.MODE_CBC:
         aes = AES.new(key, mode, iv)
     else:
