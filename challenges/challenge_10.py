@@ -9,7 +9,6 @@
 import os
 
 from base64 import b64decode
-from typing import Literal
 from challenges.challenge_02 import bytes_xor
 from challenges.challenge_07 import aes_ecb_decrypt
 from challenges.challenge_08 import bytes_to_chunks
@@ -47,8 +46,8 @@ def run_challenge(input_data: str):
     print("🔓 Decrypting ciphertext...")
 
     # Use a fixed key and IV for this challenge
-    key: Literal[b""] = b"YELLOW SUBMARINE"  # Fixed 16-byte key for
-    iv: Literal[b""] = bytes(BLOCK_SIZE)  # Fixed IV of BLOCK_SIZE null bytes
+    key: bytes = b"YELLOW SUBMARINE"  # Fixed 16-byte key for
+    iv: bytes = bytes(BLOCK_SIZE)  # Fixed IV of BLOCK_SIZE null bytes
 
     try:
         plaintext = aes_cbc_decrypt(ciphertext, key, iv)
@@ -70,7 +69,7 @@ def aes_cbc_decrypt(
     """Decrypts ciphertext using AES in CBC mode."""
     blocks: list[bytes] = bytes_to_chunks(ciphertext, BLOCK_SIZE)
     previous_ciphertext: bytes = iv
-    plaintext: Literal[b""] = b""
+    plaintext: bytes = b""
 
     for block in blocks:
         raw_decrypted_block: bytes = aes_ecb_decrypt(block, key)
