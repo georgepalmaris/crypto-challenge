@@ -23,6 +23,11 @@ def run_challenge(input_data: str):
 
     print("📥 Input (hex strings):", input_data)
 
+    with open(f"{os.getcwd()}/challenges/results/challenge_08.txt", "r") as f:
+        expected_result = f.read().strip()
+
+    print("🏁 Expected Result (hex):", expected_result)
+
     ciphertexts = [bytes.fromhex(line.strip()) for line in input_data]
 
     for index, ciphertext in enumerate(ciphertexts):
@@ -42,6 +47,12 @@ def run_challenge(input_data: str):
         print("   Number of blocks:", num_blocks)
         print("   Number of unique blocks:", num_unique_blocks)
         print("   Number of repeated blocks:", num_repeated_blocks)
+
+        if ciphertext.hex() == expected_result:
+            print("✅ This ciphertext matches the expected result!")
+            break
+        else:
+            print("❌ This ciphertext does not match the expected result.")
 
 
 def bytes_to_chunks(b: bytes, chunk_size: int, quiet_mode=True) -> list[bytes]:

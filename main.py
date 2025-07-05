@@ -6,16 +6,49 @@ A Python script for cryptographic challenges and exercises.
 
 import argparse
 import sys
+import os
+import importlib
+import re
 
 from typing import Optional
-from challenges.challenge_01 import run_challenge as run_challenge_1
-from challenges.challenge_02 import run_challenge as run_challenge_2
-from challenges.challenge_03 import run_challenge as run_challenge_3
-from challenges.challenge_04 import run_challenge as run_challenge_4
-from challenges.challenge_05 import run_challenge as run_challenge_5
-from challenges.challenge_06 import run_challenge as run_challenge_6
-from challenges.challenge_07 import run_challenge as run_challenge_7
-from challenges.challenge_08 import run_challenge as run_challenge_8
+
+
+def load_challenges():
+    """Dynamically load all challenge modules from the challenges directory."""
+    challenges_dir = os.path.join(os.getcwd(), "challenges")
+    challenge_modules = {}
+
+    if not os.path.exists(challenges_dir):
+        print("❌ Challenges directory not found!")
+        return {}
+
+    # Find all challenge_XX.py files
+    for filename in sorted(os.listdir(challenges_dir)):
+        if filename.startswith("challenge_") and filename.endswith(".py"):
+            # Extract challenge number from filename
+            match = re.match(r"challenge_(\d+)\.py", filename)
+            if match:
+                challenge_num = int(match.group(1))
+                module_name = f"challenges.challenge_{challenge_num:02d}"
+
+                try:
+                    # Dynamically import the module
+                    module = importlib.import_module(module_name)
+                    if hasattr(module, "run_challenge"):
+                        challenge_modules[challenge_num] = module.run_challenge
+                        print(f"✅ Loaded challenge {challenge_num}")
+                    else:
+                        print(
+                            f"⚠️  Challenge {challenge_num} missing run_challenge function"
+                        )
+                except ImportError as e:
+                    print(f"❌ Failed to import challenge {challenge_num}: {e}")
+
+    return challenge_modules
+
+
+# Load all available challenges dynamically
+CHALLENGE_FUNCTIONS = load_challenges()
 
 
 def main():
@@ -73,8 +106,9 @@ def list_challenges():
 
 
 def get_challenge_list():
-    """Return dictionary of available challenges."""
-    return {
+    """Return dictionary of available challenges based on loaded modules."""
+    # Default descriptions for known challenges
+    challenge_descriptions = {
         1: "Convert hex to base64",
         2: "Fixed XOR",
         3: "Single-byte XOR cipher",
@@ -83,8 +117,19 @@ def get_challenge_list():
         6: "Break repeating-key XOR",
         7: "AES in ECB mode",
         8: "Detect AES in ECB mode",
-        # Add more challenges as you implement them
+        9: "Implement PKCS#7 padding",
+        10: "Implement CBC mode encryption",
     }
+
+    # Build list from actually loaded challenges
+    available_challenges = {}
+    for challenge_num in sorted(CHALLENGE_FUNCTIONS.keys()):
+        description = challenge_descriptions.get(
+            challenge_num, f"Challenge {challenge_num}"
+        )
+        available_challenges[challenge_num] = description
+
+    return available_challenges
 
 
 def run_challenge(challenge_num: int, input_data: Optional[str] = None):
@@ -100,22 +145,9 @@ def run_challenge(challenge_num: int, input_data: Optional[str] = None):
     print("-" * 50)
 
     try:
-        if challenge_num == 1:
-            run_challenge_1(input_data)
-        elif challenge_num == 2:
-            run_challenge_2(input_data)
-        elif challenge_num == 3:
-            run_challenge_3(input_data)
-        elif challenge_num == 4:
-            run_challenge_4(input_data)
-        elif challenge_num == 5:
-            run_challenge_5(input_data)
-        elif challenge_num == 6:
-            run_challenge_6(input_data)
-        elif challenge_num == 7:
-            run_challenge_7(input_data)
-        elif challenge_num == 8:
-            run_challenge_8(input_data)
+        # Use the dynamically loaded function
+        if challenge_num in CHALLENGE_FUNCTIONS:
+            CHALLENGE_FUNCTIONS[challenge_num](input_data)
         else:
             print(f"⚠️  Challenge {challenge_num} not implemented yet!")
 
